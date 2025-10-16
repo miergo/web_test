@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="modulepreload" href="/web_test/assets/manifest-1381d495.js"/><link rel="modulepreload" href="/web_test/assets/entry.client-DNhkbntx.js"/><link rel="modulepreload" href="/web_test/assets/chunk-OIYGIGL5-D8YKYJ8y.js"/><link rel="modulepreload" href="/web_test/assets/root-B7RKaGAl.js"/><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="modulepreload" href="/web_test/assets/manifest-6e5fe831.js"/><link rel="modulepreload" href="/web_test/assets/entry.client-DNhkbntx.js"/><link rel="modulepreload" href="/web_test/assets/chunk-OIYGIGL5-D8YKYJ8y.js"/><link rel="modulepreload" href="/web_test/assets/root-DD47J1ic.js"/><script>
             (function() {
               var redirect = sessionStorage.getItem('redirect');
               if (redirect) {
@@ -14,7 +14,12 @@
                   var path = match[1];
                   // Remove the query parameter and restore the clean URL
                   var cleanQuery = query.replace(/[?&]p=[^&]*/, '').replace(/^&/, '?');
-                  var newUrl = window.location.pathname + 
+                  // Remove trailing slash from pathname if path starts with slash
+                  var basePath = window.location.pathname;
+                  if (path && path.startsWith('/') && basePath.endsWith('/')) {
+                    basePath = basePath.slice(0, -1);
+                  }
+                  var newUrl = basePath + 
                                (path || '') + 
                                (cleanQuery || '') +
                                window.location.hash;
@@ -29,8 +34,8 @@
                 "functions. Check out https://reactrouter.com/start/framework/route-module#hydratefallback " +
                 "for more information."
               );
-            </script><script>window.__reactRouterContext = {"basename":"/web_test/","future":{"v8_middleware":false,"unstable_optimizeDeps":false,"unstable_splitRouteModules":false,"unstable_subResourceIntegrity":false,"unstable_viteEnvironmentApi":false},"routeDiscovery":{"mode":"initial"},"ssr":false,"isSpaMode":true};window.__reactRouterContext.stream = new ReadableStream({start(controller){window.__reactRouterContext.streamController = controller;}}).pipeThrough(new TextEncoderStream());</script><script type="module" async="">import "/web_test/assets/manifest-1381d495.js";
-import * as route0 from "/web_test/assets/root-B7RKaGAl.js";
+            </script><script>window.__reactRouterContext = {"basename":"/web_test/","future":{"v8_middleware":false,"unstable_optimizeDeps":false,"unstable_splitRouteModules":false,"unstable_subResourceIntegrity":false,"unstable_viteEnvironmentApi":false},"routeDiscovery":{"mode":"initial"},"ssr":false,"isSpaMode":true};window.__reactRouterContext.stream = new ReadableStream({start(controller){window.__reactRouterContext.streamController = controller;}}).pipeThrough(new TextEncoderStream());</script><script type="module" async="">import "/web_test/assets/manifest-6e5fe831.js";
+import * as route0 from "/web_test/assets/root-DD47J1ic.js";
   
   window.__reactRouterRouteModules = {"root":route0};
 
