@@ -1,28 +1,32 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="modulepreload" href="/web_test/assets/manifest-716489b6.js"/><link rel="modulepreload" href="/web_test/assets/entry.client-DNhkbntx.js"/><link rel="modulepreload" href="/web_test/assets/chunk-OIYGIGL5-D8YKYJ8y.js"/><link rel="modulepreload" href="/web_test/assets/root-D91VIz-o.js"/><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="modulepreload" href="/web_test/assets/manifest-5d0ec1d9.js"/><link rel="modulepreload" href="/web_test/assets/entry.client-DNhkbntx.js"/><link rel="modulepreload" href="/web_test/assets/chunk-OIYGIGL5-D8YKYJ8y.js"/><link rel="modulepreload" href="/web_test/assets/root-BTqljJM8.js"/><script>
             (function() {
-              var redirect = sessionStorage.getItem('redirect');
-              if (redirect) {
-                sessionStorage.removeItem('redirect');
-                history.replaceState(null, '', redirect);
-              }
+              // Check if we have a redirect query parameter from 404.html
+              var searchParams = window.location.search;
               
-              // Handle the redirect from 404.html
-              var query = window.location.search;
-              if (query) {
-                var match = query.match(/[?&]p=([^&]*)/);
-                if (match) {
-                  var path = decodeURIComponent(match[1]);
-                  // Remove the query parameter and restore the clean URL
-                  var cleanQuery = query.replace(/[?&]p=[^&]*/, '').replace(/^&/, '?');
-                  // Get the base path without trailing slash
+              if (searchParams && searchParams.indexOf('p=') !== -1) {
+                // Extract the path from the ?p= parameter
+                var match = searchParams.match(/[?&]p=([^&]*)/);
+                
+                if (match && match[1]) {
+                  // Decode the path
+                  var redirectPath = decodeURIComponent(match[1]);
+                  
+                  // Build the correct URL
+                  // Get current pathname (e.g., /web_test/ or /web_test)
                   var basePath = window.location.pathname.replace(/\/$/, '');
-                  // Ensure path starts with / and doesn't create double slashes
-                  if (path && !path.startsWith('/')) {
-                    path = '/' + path;
+                  
+                  // Ensure redirect path starts with /
+                  if (redirectPath && !redirectPath.startsWith('/')) {
+                    redirectPath = '/' + redirectPath;
                   }
-                  // Use history API to change URL without reload, so SPA routing works
-                  var newUrl = basePath + path + (cleanQuery || '') + window.location.hash;
-                  history.replaceState(null, '', newUrl);
+                  
+                  // Construct the new path (without origin to avoid reload)
+                  var newPath = basePath + redirectPath + window.location.hash;
+                  
+                  // Use history API to change URL without triggering a page reload
+                  // This must happen BEFORE React Router initializes
+                  // React Router will read window.location and see the correct path
+                  history.replaceState(null, '', newPath);
                 }
               }
             })();
@@ -33,8 +37,8 @@
                 "functions. Check out https://reactrouter.com/start/framework/route-module#hydratefallback " +
                 "for more information."
               );
-            </script><script>window.__reactRouterContext = {"basename":"/web_test/","future":{"v8_middleware":false,"unstable_optimizeDeps":false,"unstable_splitRouteModules":false,"unstable_subResourceIntegrity":false,"unstable_viteEnvironmentApi":false},"routeDiscovery":{"mode":"initial"},"ssr":false,"isSpaMode":true};window.__reactRouterContext.stream = new ReadableStream({start(controller){window.__reactRouterContext.streamController = controller;}}).pipeThrough(new TextEncoderStream());</script><script type="module" async="">import "/web_test/assets/manifest-716489b6.js";
-import * as route0 from "/web_test/assets/root-D91VIz-o.js";
+            </script><script>window.__reactRouterContext = {"basename":"/web_test/","future":{"v8_middleware":false,"unstable_optimizeDeps":false,"unstable_splitRouteModules":false,"unstable_subResourceIntegrity":false,"unstable_viteEnvironmentApi":false},"routeDiscovery":{"mode":"initial"},"ssr":false,"isSpaMode":true};window.__reactRouterContext.stream = new ReadableStream({start(controller){window.__reactRouterContext.streamController = controller;}}).pipeThrough(new TextEncoderStream());</script><script type="module" async="">import "/web_test/assets/manifest-5d0ec1d9.js";
+import * as route0 from "/web_test/assets/root-BTqljJM8.js";
   
   window.__reactRouterRouteModules = {"root":route0};
 
