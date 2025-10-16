@@ -7,7 +7,7 @@ import { ORDERED_CATEGORIES, CATEGORY_METADATA } from "~/constants/categories";
 
 export function meta() {
   return [
-    { title: "Ari - Portfolio" },
+    { title: "Ari - Web Portfolio" },
     {
       name: "description",
       content: "Creative developer and designer portfolio showcasing Touch Designer, Grasshopper, University Projects, and P5.js work."
