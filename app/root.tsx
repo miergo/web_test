@@ -47,7 +47,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   var path = match[1];
                   // Remove the query parameter and restore the clean URL
                   var cleanQuery = query.replace(/[?&]p=[^&]*/, '').replace(/^&/, '?');
-                  var newUrl = window.location.pathname + 
+                  // Remove trailing slash from pathname if path starts with slash
+                  var basePath = window.location.pathname;
+                  if (path && path.startsWith('/') && basePath.endsWith('/')) {
+                    basePath = basePath.slice(0, -1);
+                  }
+                  var newUrl = basePath + 
                                (path || '') + 
                                (cleanQuery || '') +
                                window.location.hash;
