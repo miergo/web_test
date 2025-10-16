@@ -48,11 +48,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   // Remove the query parameter and restore the clean URL
                   var cleanQuery = query.replace(/[?&]p=[^&]*/, '').replace(/^&/, '?');
                   // Get the base path without trailing slash
-                  var basePath = window.location.pathname.replace(/\/$/, '');
+                  var basePath = window.location.pathname.replace(/\\/$/, '');
                   // Ensure path starts with / and doesn't create double slashes
                   if (path && !path.startsWith('/')) {
                     path = '/' + path;
                   }
+                  // Use history API to change URL without reload, so SPA routing works
                   var newUrl = basePath + path + (cleanQuery || '') + window.location.hash;
                   history.replaceState(null, '', newUrl);
                 }
