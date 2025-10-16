@@ -112,7 +112,7 @@ public/
 npm run deploy
 
 # Your site will be live at:
-# https://miergo.github.io/web_test/
+# https://miergo.github.io/web_test
 ```
 
 ---

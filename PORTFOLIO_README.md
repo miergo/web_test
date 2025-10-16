@@ -69,7 +69,7 @@ npm run build
 ```bash
 npm run deploy
 ```
-Your site will be live at: `https://miergo.github.io/web_test/`
+Your site will be live at: `https://miergo.github.io/web_test`
 
 ---
 

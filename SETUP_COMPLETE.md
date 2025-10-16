@@ -47,7 +47,7 @@ npm run build
 ```bash
 npm run deploy
 ```
-Live at: https://miergo.github.io/web_test/
+Live at: https://miergo.github.io/web_test
 
 ---
 
@@ -133,7 +133,7 @@ Each category auto-filters from `projects.ts`:
 ## 🔗 Current Setup
 
 **GitHub Repo:** Connected ✅  
-**Deploy Target:** https://miergo.github.io/web_test/  
+**Deploy Target:** https://miergo.github.io/web_test  
 **Current Branch:** master  
 **Build Status:** ✅ Successful
 
