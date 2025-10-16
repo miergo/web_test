@@ -5,32 +5,53 @@
   <meta charset="utf-8">
   <title>Redirecting...</title>
   <script>
-    // GitHub Pages SPA redirect solution
-    // This script takes the current URL and redirects to index.html with the path as a query parameter
-    // The main app will then restore the correct URL
+    /**
+     * GitHub Pages SPA 404 Handler
+     * 
+     * Purpose: GitHub Pages serves this 404.html when a URL doesn't match a physical file.
+     * For SPAs, routes like /project/123 don't exist as files, so we need to redirect
+     * them to index.html while preserving the path information.
+     * 
+     * How it works:
+     * 1. User visits: https://miergo.github.io/web_test/project/td-project-1
+     * 2. GitHub Pages can't find that file, serves this 404.html
+     * 3. This script extracts the path and redirects to: 
+     *    https://miergo.github.io/web_test/?p=/project/td-project-1
+     * 4. index.html loads with the path in the query parameter
+     * 5. index.html's script restores the clean URL and renders the route
+     */
 
-    const pathSegmentsToKeep = 1; // Change this to match your base path depth (web_test = 1 segment)
+    // Configuration: Number of path segments that represent the base path
+    // For /web_test/project/123:
+    //   - "web_test" = 1 segment (the base)
+    //   - "project/123" = app route (what we want to preserve)
+    const BASE_PATH_SEGMENTS = 1;
 
-    const path = window.location.pathname;
-    const segments = path.split('/').filter(segment => segment);
+    // Parse the current URL path
+    const fullPath = window.location.pathname;
+    const pathSegments = fullPath.split('/').filter(segment => segment.length > 0);
 
-    // Remove the base path segments
-    const appSegments = segments.slice(pathSegmentsToKeep);
-    const appPath = appSegments.length > 0 ? '/' + appSegments.join('/') : '';
+    // Separate base path from app path
+    // Example: ["web_test", "project", "td-project-1"] 
+    //   -> base: ["web_test"]
+    //   -> app: ["project", "td-project-1"]
+    const appPathSegments = pathSegments.slice(BASE_PATH_SEGMENTS);
+    const appPath = appPathSegments.length > 0 ? '/' + appPathSegments.join('/') : '';
 
-    // Redirect to index.html with the path and query string preserved
-    const redirect = window.location.origin +
-      '/' + segments.slice(0, pathSegmentsToKeep).join('/') +
-      '/?p=' + appPath +
+    // Build redirect URL to index.html with path as query parameter
+    const redirectUrl = window.location.origin +
+      '/' + pathSegments.slice(0, BASE_PATH_SEGMENTS).join('/') +
+      '/?p=' + encodeURIComponent(appPath) +
       (window.location.search ? '&' + window.location.search.slice(1) : '') +
       window.location.hash;
 
-    window.location.replace(redirect);
+    // Perform the redirect (replaces history entry, no back button loop)
+    window.location.replace(redirectUrl);
   </script>
 </head>
 
 <body>
-  <p>Redirecting...</p>
+  <p>Redirecting to the application...</p>
 </body>
 
 </html>
