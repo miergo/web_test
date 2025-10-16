@@ -1,6 +1,6 @@
 {
   "name": "website_test",
-  "homepage": "https://miergo.github.io/web_test/",
+  "homepage": "https://miergo.github.io/web_test",
   "private": true,
   "type": "module",
   "scripts": {
