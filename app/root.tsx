@@ -29,6 +29,34 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* GitHub Pages SPA redirect handler */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            (function() {
+              var redirect = sessionStorage.getItem('redirect');
+              if (redirect) {
+                sessionStorage.removeItem('redirect');
+                history.replaceState(null, '', redirect);
+              }
+              
+              // Handle the redirect from 404.html
+              var query = window.location.search;
+              if (query) {
+                var match = query.match(/[?&]p=([^&]*)/);
+                if (match) {
+                  var path = match[1];
+                  // Remove the query parameter and restore the clean URL
+                  var cleanQuery = query.replace(/[?&]p=[^&]*/, '').replace(/^&/, '?');
+                  var newUrl = window.location.pathname + 
+                               (path || '') + 
+                               (cleanQuery || '') +
+                               window.location.hash;
+                  history.replaceState(null, '', newUrl);
+                }
+              }
+            })();
+          `
+        }} />
         <Meta />
         <Links />
       </head>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    // GitHub Pages SPA redirect solution
+    // This script takes the current URL and redirects to index.html with the path as a query parameter
+    // The main app will then restore the correct URL
+    
+    const pathSegmentsToKeep = 1; // Change this to match your base path depth (web_test = 1 segment)
+    
+    const path = window.location.pathname;
+    const segments = path.split('/').filter(segment => segment);
+    
+    // Remove the base path segments
+    const appSegments = segments.slice(pathSegmentsToKeep);
+    const appPath = appSegments.length > 0 ? '/' + appSegments.join('/') : '';
+    
+    // Redirect to index.html with the path and query string preserved
+    const redirect = window.location.origin + 
+                    '/' + segments.slice(0, pathSegmentsToKeep).join('/') + 
+                    '/?p=' + appPath + 
+                    (window.location.search ? '&' + window.location.search.slice(1) : '') +
+                    window.location.hash;
+    
+    window.location.replace(redirect);
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>
+
